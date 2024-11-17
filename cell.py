@@ -28,18 +28,20 @@ class Cell:
     def draw(self):
         if self._win is None:
             return
-        if self.has_left_wall:
-            left_wall = Line(Point(self._x1, self._y1), Point(self._x1, self._y2))
-            self._win.draw_line(left_wall)
-        if self.has_right_wall:
-            right_wall = Line(Point(self._x2, self._y1), Point(self._x2, self._y2))
-            self._win.draw_line(right_wall)
-        if self.has_top_wall:
-            top_wall = Line(Point(self._x1, self._y1), Point(self._x2, self._y1))
-            self._win.draw_line(top_wall)
-        if self.has_bottom_wall:
-            bottom_wall = Line(Point(self._x1, self._y2), Point(self._x2, self._y2))
-            self._win.draw_line(bottom_wall)
+
+        left_wall = Line(Point(self._x1, self._y1), Point(self._x1, self._y2))
+        right_wall = Line(Point(self._x2, self._y1), Point(self._x2, self._y2))
+        top_wall = Line(Point(self._x1, self._y1), Point(self._x2, self._y1))
+        bottom_wall = Line(Point(self._x1, self._y2), Point(self._x2, self._y2))
+
+        self.draw_wall(left_wall, self.has_left_wall)
+        self.draw_wall(right_wall, self.has_right_wall)
+        self.draw_wall(top_wall, self.has_top_wall)
+        self.draw_wall(bottom_wall, self.has_bottom_wall)
+
+    def draw_wall(self, wall, has_wall):
+        fill_color = "black" if has_wall else "white"
+        self._win.draw_line(wall, fill_color)
 
     def draw_move(self, to_cell, undo=False):
         line = Line(
