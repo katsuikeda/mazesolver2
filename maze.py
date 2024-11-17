@@ -4,15 +4,14 @@ from cell import Cell
 class Maze:
     def __init__(
         self,
-        win,
         x1,
         y1,
         num_rows,
         num_cols,
         cell_size_x,
         cell_size_y,
+        win=None,
     ):
-        self._win = win
         self._cells = []
         self._x1 = x1
         self._y1 = y1
@@ -20,6 +19,7 @@ class Maze:
         self._num_cols = num_cols
         self._cell_size_x = cell_size_x
         self._cell_size_y = cell_size_y
+        self._win = win
 
         self._create_cells()
 
@@ -39,6 +39,8 @@ class Maze:
                 self._draw_cell(col, row)
 
     def _draw_cell(self, col, row):
+        if self._win is None:
+            return
         cell = self._cells[col][row]
         cell.draw()
         self._animate()
