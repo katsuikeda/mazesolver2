@@ -15,6 +15,7 @@ class Cell:
         has_bottom_wall=True,
         win=None,
     ):
+        self._win = win
         self._x1 = x1
         self._y1 = y1
         self._x2 = x2
@@ -23,7 +24,7 @@ class Cell:
         self.has_right_wall = has_right_wall
         self.has_top_wall = has_top_wall
         self.has_bottom_wall = has_bottom_wall
-        self._win = win
+        self.is_visited = False
 
     def draw(self):
         if self._win is None:
